@@ -2,7 +2,7 @@ package module;
 
 public class Equilateral extends Triangle {
 
-	public Equilateral(float a, float b, float c) {
+	public Equilateral(int a, int b, int c) {
 		super(a, b, c);
 	}
 	

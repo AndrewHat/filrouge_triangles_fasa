@@ -1,11 +1,11 @@
 package module;
 
 public class Triangle {
-	protected float a;
-	protected float b;
-	protected float c;
+	protected int a;
+	protected int b;
+	protected int c;
 	
-	public Triangle(float a, float b, float c) {
+	public Triangle(int a, int b, int c) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
