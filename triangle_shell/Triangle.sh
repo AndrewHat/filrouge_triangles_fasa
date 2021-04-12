@@ -4,6 +4,11 @@ read a
 read b
 read c
 
+if [ $a -le 0 ] || [ $b -le 0 ] || [ $c -le 0 ] ; then
+	echo "Erreur: les côtés ne peuvent pas être inférieur ou égal à zero"
+	exit 1
+fi
+
 function scalene (){
 	if [ $a -ne $b ] && [ $a -ne $c ] && [ $b -ne $c ]
 	then
