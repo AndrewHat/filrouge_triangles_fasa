@@ -1,9 +1,15 @@
 <!DOCTIPE html>
+
 <html>
 
 <head>
 
+<meta charset="utf-8"/>
+
 <title> Nature du tiangle </title>
+
+<! relier le fichier html et Java stcript >
+
 <script type="text/javascript" src="TriangleFilRouge.js"></script>
 
 </head>
@@ -14,10 +20,15 @@
 <form method= "post">
 
 <fieldset>
-<legend>Entrer les valeurs des cotés </legend>
+
+<! recupérer les cotés du triangle pour pouvoir les traiter dans javascript>
+
+<legend>Entrez les valeurs des cotés </legend>
 Coté a: <input type = "number" id = 'a' /><br/><br/>
 Coté b: <input type = "number" id = 'b'/><br/><br/>
 Coté c: <input type = "number" id = 'c'/><br/><br/>
+
+<! Le bouton Valider permetra de traiter les données saisies dans javascript>
 
 <button onClick="JavaScript:Triangle()">Valider</button>
 
