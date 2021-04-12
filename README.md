@@ -1,5 +1,5 @@
-# filrouge_triangles_fasa
-FASA (Fouhad Aziz Salimatou Andrew)
+# Filrouge Triangles FASA
+FASA (Fouad Aziz Salimatou Andrew)
 
 ## Java
 Il faut entrer les valeurs avec un retour chariot.
