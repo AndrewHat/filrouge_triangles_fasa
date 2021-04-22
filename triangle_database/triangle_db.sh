@@ -3,9 +3,17 @@
 NBMAX=500
 index=1
 
-echo
+l=$(wc -l < triangle.sql)
+h=$(head -n 9 triangle.sql)
+
+if [ $l -gt $NBMAX ]; then
+  echo "$h" > triangle.sql
+  echo "testo"
+fi
+
 echo "Génération des triangles aléatoires : "
 echo "-----------------"
+echo "" >> triangle.sql
 echo "INSERT INTO triangle(A, B, C, ID) VALUES" >> triangle.sql
 
 while [ "$index" -lt $NBMAX ]      # Génère 500 entiers aléatoires.
@@ -43,8 +51,4 @@ let "C++"
 
 echo "('$A','$B','$C','$index');" >> triangle.sql
 
-cat triangle.sql | mysql -u root -p
-
-
-
-
+# cat triangle.sql | mysql -u root -p
