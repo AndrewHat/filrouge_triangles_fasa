@@ -44,9 +44,7 @@ if [ $l -gt $NBMAX ]; then
   echo "$h" > triangle.sql
 fi
 
-
-
-
+## TODO mettre ici le sql pour creer la database et les tables
 echo "Génération des triangles aléatoires : "
 echo "-----------------"
 echo "" >> triangle.sql
@@ -100,10 +98,12 @@ isocele
 cat triangle.sql | mysql -u root
 
 # statistique des triangles generes
-percent_sc = `$m / $NBMAX *100 | bc -l`
-percent_eq = `$n / $NBMAX*100 | bc -l`
-percent_is = `$p / $NBMAX *100  | bc -l`
+percent_sc=$(bc -l <<< $m / $NBMAX *100)
+percent_eq=$(bc -l <<< $n / $NBMAX*100)
+percent_is=$(bc-l <<< $p / $NBMAX *100)
 
-echo "pourcentage des triangles scalenes = $percent_sc"
-echo "pourcentage des triangles equilaterals = $percent_eq"
-echo "pourcentage des triangles isoceles = $percent_is"
+echo "$m scalene, $n equilateral, $p isocele, $NBMAX total" > log
+echo "pourcentage des triangles scalenes = $percent_sc" >> log
+echo "pourcentage des triangles equilaterals = $percent_eq" >> log
+echo "pourcentage des triangles isoceles = $percent_is" >> log
+cat log
