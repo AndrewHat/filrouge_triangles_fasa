@@ -2,14 +2,50 @@
 
 NBMAX=500
 index=1
+limit=10
+m=0
+n=0
+p=0
 
+function scalene ()
+{
+	if [ $A -ne $B ] && [ $A -ne $C ] && [ $B -ne $C ]
+	then let "m += 1" 
+	fi	
+}
+function equilateral ()
+{
+	if [ $A -eq $B ] && [ $A -eq $B ] && [ $B -eq $C ]
+	then
+	let "n += 1" 
+	fi	
+}
+function isocele ()
+{
+	if [ $A -eq $B ] && [ $A -ne $C ]
+	then let "p += 1" 
+	fi
+	
+	if [ $A -eq $C ] && [ $A -ne $B ]
+	then let "p += 1" 
+	fi
+	
+	if [ $B -eq $C ] && [ $A -ne $B ]
+	then let "p += 1" 
+	fi
+}
+
+
+
+## recharger le sql pour recharger un bdd de NBMAX triangles
 l=$(wc -l < triangle.sql)
 h=$(head -n 9 triangle.sql)
-
 if [ $l -gt $NBMAX ]; then
   echo "$h" > triangle.sql
-  echo "testo"
 fi
+
+
+
 
 echo "Génération des triangles aléatoires : "
 echo "-----------------"
@@ -20,35 +56,54 @@ while [ "$index" -lt $NBMAX ]      # Génère 500 entiers aléatoires.
 do
   
   A=$RANDOM
-  let "A %= 11"
+  let "A %= limit"
   let "A++"
 
   B=$RANDOM
-  let "B %= 11"
+  let "B %= limit"
   let "B++"
 
   C=$RANDOM
-  let "C %= 11"
+  let "C %= limit"
   let "C++"
 
   echo "('$A','$B','$C','$index')," >> triangle.sql
     
   let "index += 1" 
  
+  scalene
+  equilateral
+  isocele
+
 done
 
+# dernière itération pour ecrire le ;
 A=$RANDOM
-let "A %= 11"
+let "A %= limit"
 let "A++"
 
 B=$RANDOM
-let "B %= 11"
+let "B %= limit"
 let "B++"
 
 C=$RANDOM
-let "C %= 11"
+let "C %= limit"
 let "C++"
 
 echo "('$A','$B','$C','$index');" >> triangle.sql
 
-# cat triangle.sql | mysql -u root -p
+scalene
+equilateral
+isocele
+
+# charge le sql dans le gestionnaire mysql
+cat triangle.sql | mysql -u root
+
+# statistique des triangles generes
+percent_sc = `$m / $NBMAX *100 | bc -l`
+percent_eq = `$n / $NBMAX*100 | bc -l`
+percent_is = `$p / $NBMAX *100  | bc -l`
+
+echo "pourcentage des triangles scalenes = $percent_sc"
+echo "pourcentage des triangles equilaterals = $percent_eq"
+echo "pourcentage des triangles isoceles = $percent_is"
