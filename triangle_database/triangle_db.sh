@@ -100,7 +100,7 @@ cat triangle.sql | mysql -u root
 # statistique des triangles generes
 percent_sc=$(bc -l <<< $m / $NBMAX *100)
 percent_eq=$(bc -l <<< $n / $NBMAX*100)
-percent_is=$(bc-l <<< $p / $NBMAX *100)
+percent_is=$(bc -l <<< $p / $NBMAX *100)
 
 echo "$m scalene, $n equilateral, $p isocele, $NBMAX total" > log
 echo "pourcentage des triangles scalenes = $percent_sc" >> log
